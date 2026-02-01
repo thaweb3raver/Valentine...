@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💌</title>
+  <style>
+    body {
+      font-family: 'Brush Script MT', cursive;
+      text-align: center;
+      background: #ffebef;
+      color: #b30000;
+      margin: 0;
+      overflow: hidden;
+    }
+    .page {
+      display: none;
+      padding-top: 100px;
+    }
+    .active {
+      display: block;
+    }
+    h1, p {
+      font-size: 2em;
+    }
+    button {
+      padding: 12px 24px;
+      margin: 15px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .yes {
+      background: green;
+      color: white;
+    }
+    .no {
+      background: red;
+      color: white;
+    }
+    .celebration {
+      font-size: 2.5em;
+      margin-top: 50px;
+      color: #b30000;
+    }
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 50px;
+      height: 70px;
+      background: red;
+      border-radius: 50%;
+      animation: floatUp 6s linear infinite;
+    }
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: black;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-120vh); }
+    }
+  </style>
+</head>
+<body>
+  <!-- First Page -->
+  <div id="page1" class="page active">
+    <h1>Hey Baby 💕</h1>
+    <button onclick="nextPage()">Continue</button>
+  </div>
+
+  <!-- Second Page -->
+  <div id="page2" class="page">
+    <p>This Valentine’s, I just want one thing—<br>
+    to call you mine.<br>
+    Will you be my Valentine?</p>
+    <button class="yes" onclick="sayYes()">Yes</button>
+    <button class="no" onclick="alert('Oh no... but I’ll keep trying 💕')">No</button>
+  </div>
+
+  <!-- Celebration Page -->
+  <div id="celebration" class="page">
+    <div class="celebration">Yayyy! Knew you'd say YES ❤️<br>
+    I love you very much, Ife!</div>
+  </div>
+
+  <script>
+    function nextPage() {
+      document.getElementById('page1').classList.remove('active');
+      document.getElementById('page2').classList.add('active');
+    }
+
+    function sayYes() {
+      document.getElementById('page2').classList.remove('active');
+      document.getElementById('celebration').classList.add('active');
+      launchBalloons();
+    }
+
+    function launchBalloons() {
+      for (let i = 0; i < 15; i++) {
+        let balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.left = Math.random() * window.innerWidth + 'px';
+        balloon.style.background = (i % 2 === 0) ? 'red' : 'white';
+        balloon.style.animationDuration = (4 + Math.random() * 3) + 's';
+        document.body.appendChild(balloon);
+      }
+    }
+  </script>
+</body>
+</html>
