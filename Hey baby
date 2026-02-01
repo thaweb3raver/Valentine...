@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💌</title>
+  <style>
+    body {
+      font-family: 'Dancing Script', cursive;
+      text-align: center;
+      background: linear-gradient(135deg, #ffebef, #ffe0f0);
+      color: #b30000;
+      margin: 0;
+      overflow: hidden;
+    }
+    .page {
+      display: none;
+      padding-top: 100px;
+    }
+    .active {
+      display: block;
+    }
+    h1, p {
+      font-size: 2.2em;
+    }
+    button {
+      padding: 12px 24px;
+      margin: 15px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.3s;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    .yes { background: green; color: white; }
+    .no { background: red; color: white; }
+    .celebration {
+      font-size: 2.5em;
+      margin-top: 50px;
+      color: #b30000;
+      animation: fadeIn 2s ease-in-out;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatUp 8s linear infinite;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before { top: -15px; left: 0; }
+    .heart::after { left: 15px; top: 0; }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Music -->
+  <audio id="bgMusic" src="love-song.mp3" autoplay loop></audio>
+
+  <!-- First Page -->
+  <div id="page1" class="page active">
+    <h1>Hey My Love 💕</h1>
+    <button onclick="nextPage()">Continue</button>
+  </div>
+
+  <!-- Second Page (Epistle) -->
+  <div id="page2" class="page">
+    <p style="max-width: 700px; margin: auto; line-height: 1.6; font-size: 1.5em;">
+      My dearest Ife,<br><br>
+      From the very first moment our paths crossed, my heart knew it had found
+      something rare and beautiful. You bring light into my days, warmth into my nights,
+      and joy into every little corner of my soul. I find myself smiling at the thought
+      of you, dreaming of the future we could share, and cherishing every memory we’ve
+      already made.<br><br>
+      This Valentine’s, I don’t want roses or chocolates — I want something far more
+      precious. I want the gift of calling you mine, of holding your hand through
+      life’s ups and downs, of building a love story that will be told for generations.
+      You are my safe place, my sweetest dream, and my greatest blessing.<br><br>
+      So here I am, pouring my heart out, asking with all the love I have:
+      Will you be my Valentine, not just for today, but for every day to come?
+    </p>
+    <button class="yes" onclick="sayYes()">Yes</button>
+    <button class="no" onclick="alert('Oh no... but my heart will keep chasing you 💕')">No</button>
+  </div>
+
+  <!-- Celebration Page -->
+  <div id="celebration" class="page">
+    <div class="celebration">
+      Yayyy! Knew you'd say YES ❤️<br><br>
+      Ife, you are the melody in my heart, the poetry in my soul, and the reason
+      I believe in forever. With you, every day feels like Valentine’s Day —
+      filled with laughter, tenderness, and endless love.<br><br>
+      I promise to cherish you, to stand by you, and to love you more deeply
+      with each passing moment. You are my forever Valentine, and I am so
+      grateful that you chose me. 💕
+    </div>
+  </div>
+
+  <script>
+    function nextPage() {
+      document.getElementById('page1').classList.remove('active');
+      document.getElementById('page2').classList.add('active');
+    }
+
+    function sayYes() {
+      document.getElementById('page2').classList.remove('active');
+      document.getElementById('celebration').classList.add('active');
+      launchHearts();
+      document.getElementById('bgMusic').play();
+    }
+
+    function launchHearts() {
+      for (let i = 0; i < 25; i++) {
+        let heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+        document.body.appendChild(heart);
+      }
+    }
+  </script>
+</body>
+</html>
